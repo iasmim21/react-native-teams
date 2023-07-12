@@ -1,20 +1,32 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { GroupCard } from '@components/GroupCard';
+import { Header } from '@components/Header';
+import { Highlight } from '@components/Highlight';
+import { ListEmpty } from '@components/ListEmpty';
+import { useState } from 'react';
+import { FlatList } from 'react-native';
+
+import { Container } from './styles';
 
 export function Groups() {
-  return (
-    <View style={styles.container}>
-      <Text>Groups</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
-}
+	const [groups, setGroups] = useState<string[]>([]);
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+	return (
+		<Container>
+			<Header />
+
+			<Highlight title="Turmas" subtitle="jogue com a sua turma" />
+
+			<FlatList
+				data={groups}
+				keyExtractor={item => item}
+				renderItem={({ item }) => (
+					<GroupCard title={item} />
+				)}
+				contentContainerStyle={!groups.length && { flex: 1}}
+				ListEmptyComponent={() => (
+					<ListEmpty message="Que tal cadastrar a primeira turma?" />
+				)}
+			/>
+		</Container>
+	);
+}
