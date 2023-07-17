@@ -24,6 +24,7 @@ export function Groups() {
 					<GroupCard title={item} />
 				)}
 				contentContainerStyle={!groups.length && { flex: 1}}
+				showsVerticalScrollIndicator={false}
 				ListEmptyComponent={() => (
 					<ListEmpty message="Que tal cadastrar a primeira turma?" />
 				)}
